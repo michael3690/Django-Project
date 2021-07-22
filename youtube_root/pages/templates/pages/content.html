@@ -1,0 +1,24 @@
+{% extends "pages/page.html" %}
+
+{% block title %}Add Post{% endblock title %}
+{% block nav %}
+{% include "nav.html" %}
+{% endblock nav %}
+{% block main_content %}
+{% if submitted %}
+    <h2>Your Post was submitted successfully</h2>
+{% else %}
+    <h2>Add post</h2>
+    <div class="form-group">
+    <div class="form-size">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+
+            <input type="submit" value="Post" class="btn btn-primary float-right">
+        </form>
+    </div>
+    </div>
+{% endif %}
+{% endblock main_content %}

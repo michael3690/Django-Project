@@ -1,0 +1,37 @@
+{% extends "pages/page.html" %}
+{% block title %}Contact Us{% endblock title %}
+{% block main_content %}
+	<h1>Contact us</h1>
+	{% if submitted %}
+		<p class="success">
+		Your message was submitted successfully. Thank you.
+		</p>
+
+	{% else %}
+	    <div class="center-form">
+		<form action="" method="post" novalidate>
+			{% for field in form %}
+			<div class="form-group {% if field.errors %}has-error{% endif %}" id="group_{{ field.name }}">
+				<label for="id_{{ field.name }}" class="col-md-4 control-label label-position">{{ field.label }}</label>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						{% if field.label == "Your name:" %}
+						  <div class="user-icon icon-size" data-icon="ei-user"></div>
+						{% elif field.label == "Your e-mail address:" %}
+						  <div class="user-icon icon-size" data-icon="ei-envelope"></div>
+						{% elif field.label == "Subject:" %}
+						  <div class="user-icon icon-size" data-icon="ei-pencil"></div>
+						{% elif field.label == "Your Message:" %}
+						  <div class="user-icon icon-size" data-icon="ei-comment" height="10" width="10"></div>
+						{% endif %}
+					</div>
+					{{ field }}
+				</div>
+			</div>
+		{% endfor %}
+		<input type="submit" value="Submit" class="btn btn-primary float-right">
+		{% csrf_token %}
+		</form>
+		</div>
+	{% endif %}
+{% endblock main_content %}

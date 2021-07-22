@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Login
+{% endblock title %}
+
+{% block nav %}
+{% include "nav.html" %}
+{% endblock nav %}
+
+{% block main_content %}
+
+  {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <p>Please login to see this page.</p>
+    {% endif %}
+  {% endif %}
+    <div class="LoginForm">
+      <form class="form-signin" method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <table class="table">
+          <tr>
+            <td>{{ form.username.label_tag }}</td>
+            <td>{{ form.username }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.password.label_tag }}</td>
+            <td>{{ form.password }}</td>
+          </tr>
+        </table>
+        <div class="text-center login-button">
+        <input type="submit" value="login" class="btn btn-lg btn-primary" />
+        <input type="hidden" name="next" value="{{ next }}" />
+      </form>
+      </div>
+      <p><a href="{% url 'password_reset' %}">Forgotten password?</a></p>
+    </div>
+{% endblock main_content %}

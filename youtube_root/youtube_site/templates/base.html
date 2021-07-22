@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>
+  {% block title %}
+    untitled
+  {% endblock title %}
+  </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/evil-icons@1.9.0/assets/evil-icons.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/evil-icons@1.9.0/assets/evil-icons.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link href="{% static 'main.css' %}" rel="stylesheet" type="text/css">
+  <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+</head>
+
+<body class="d-flex flex-column h-100">
+  <header>
+<!-- Fixed navbar -->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="https://www.youtube.com/"><img class="logo" src="{% static 'logo.png' %}" height="70" width="100" alt="youtube logo"/></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+        {% block nav %}
+        <li class="nav-item">Menu 1</li>
+        <li class="nav-item">Menu 2</li>
+        <li class="nav-item">Menu 3</li>
+        {% endblock nav %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'index' %}contact">Contact Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'index' %}posts">Posts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"href="{% url 'index' %}polls/1/">Survey</a>
+      </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      {% if user.is_authenticated %}
+      <div class="dropdown">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            {{ user.get_username }}
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{% url 'index'%}add_content">Add Post</a>
+          <a class="dropdown-item" href="{% url 'logout'%}">Logout</a>
+        </div>
+      </div>
+    {% else %}
+      <li><a href="{% url 'index' %}accounts/login/"><div class="user-icon" data-icon="ei-user"></div></a></li>
+    {% endif %}
+    </ul>
+  </div>
+</nav>
+</header>
+
+<!-- Begin page content -->
+<main role="main" class="flex-shrink-0">
+<div class="container main-content">
+    {% block main_content %}
+
+    {% endblock main_content%}
+</div>
+</main>
+
+<footer class="footer mt-auto py-3">
+<div class="container">
+  <span class="text-muted"><p>Copyright &copy; 2021 Michael Donohoe</p></span>
+</div>
+</footer>
+</html>

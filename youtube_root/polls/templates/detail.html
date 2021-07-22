@@ -1,0 +1,22 @@
+{% extends "pages/page.html" %}
+{% block title %}Survey{% endblock title %}
+{% block nav %}
+{% include "nav.html" %}
+{% endblock nav %}
+{% block main_content %}
+<h1>{{ question.question_text }}</h1>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<div class="center-content">
+<form action="{% url 'polls:vote' question.id %}" method="post">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+{% endfor %}
+<br>
+<input type="submit" value="Vote">
+</form>
+<br>
+<a class="btn btn-secondary" href="{% url 'polls:results' question.id %}" role="button">View Results</a>
+</div>
+{% endblock main_content %}

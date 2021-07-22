@@ -1,0 +1,19 @@
+{% extends "pages/page.html" %}
+
+{% block title %}Posts{% endblock title %}
+{% block nav %}
+    {% include "nav.html" %}
+{% endblock nav %}
+{% block main_content %}
+  <div class="center-post">
+    {% for post in object_list %}
+        <h2>{{ post.title }} - {{post.author}}</h2>
+        {% if post.image %}
+        <div class="post-image">
+            <img src="/donohm34{{ post.image.url }}" height="200" width=auto >
+        </div>
+        {% endif %}
+        {{ post.maintext|safe }}
+    {% endfor %}
+  </div>
+{% endblock main_content %}

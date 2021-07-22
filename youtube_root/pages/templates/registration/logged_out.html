@@ -1,0 +1,14 @@
+{% extends "pages/page.html" %}
+
+{% block title %}
+	Logged out
+{% endblock title %}
+
+{% block nav %}
+{% include "nav.html" %}
+{% endblock nav %}
+
+{% block main_content %}
+  <p>Logged out!</p>
+  <p><a href="{% url 'login'%}">Click here to login again.</a></p>
+{% endblock main_content %}
