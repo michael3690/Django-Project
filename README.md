@@ -2,6 +2,8 @@
 
 Live website with some slight changes can be found at: http://michael3690.pythonanywhere.com/
 
+I have removed the settings file and database for security reasons
+
 ## Youtube website
 
 This website contains information about youtube channels that focus on 
